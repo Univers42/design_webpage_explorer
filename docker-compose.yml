@@ -1,0 +1,206 @@
+# ============================================================================
+# Design Explorer — a gallery of AI-built websites.
+#
+# Each site lives in its OWN directory with its OWN Dockerfile. This compose
+# file at the repo root builds and runs them one at a time. Nothing is ever
+# installed on the host — only Docker is required.
+#
+#   Dev (hot reload):    docker compose up lithos --build
+#                        -> http://localhost:5173
+#   Production (nginx):  docker compose --profile prod up lithos-prod --build
+#                        -> http://localhost:8080
+#   Stop everything:     docker compose down
+# ============================================================================
+
+name: design-explorer
+
+services:
+  # ----- Lithos: geology brand hero — dev server with hot module reload -----
+  lithos:
+    build:
+      context: ./lithos
+      target: dev
+    container_name: lithos-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./lithos:/app                          # live source -> instant HMR
+      - lithos_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true               # reliable file watching in Docker
+    restart: unless-stopped
+
+  # ----- Lithos: production build, served as static files by nginx -----
+  lithos-prod:
+    profiles: ["prod"]
+    build:
+      context: ./lithos
+      target: prod
+    container_name: lithos-prod
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # ----- Mainframe: creative agency hero — dev server with hot module reload -----
+  mainframe:
+    build:
+      context: ./mainframe
+      target: dev
+    container_name: mainframe-dev
+    ports:
+      - "5174:5174"
+    volumes:
+      - ./mainframe:/app                          # live source -> instant HMR
+      - mainframe_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true                  # reliable file watching in Docker
+    restart: unless-stopped
+
+  # ----- Mainframe: production build, served as static files by nginx -----
+  mainframe-prod:
+    profiles: ["prod"]
+    build:
+      context: ./mainframe
+      target: prod
+    container_name: mainframe-prod
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+
+  # ----- Cursor Follow: "Core Features" section — dev server with hot reload -----
+  cursor-follow:
+    build:
+      context: ./cursor-follow
+      target: dev
+    container_name: cursor-follow-dev
+    ports:
+      - "5175:5175"
+    volumes:
+      - ./cursor-follow:/app                          # live source -> instant HMR
+      - cursor_follow_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true                      # reliable file watching in Docker
+    restart: unless-stopped
+
+  # ----- Cursor Follow: production build, served as static files by nginx -----
+  cursor-follow-prod:
+    profiles: ["prod"]
+    build:
+      context: ./cursor-follow
+      target: prod
+    container_name: cursor-follow-prod
+    ports:
+      - "8082:80"
+    restart: unless-stopped
+
+  # ----- Bloom: AI floral hero (liquid glass over video) — dev with HMR -----
+  bloom:
+    build:
+      context: ./bloom
+      target: dev
+    container_name: bloom-dev
+    ports:
+      - "5176:5176"
+    volumes:
+      - ./bloom:/app                          # live source -> instant HMR
+      - bloom_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true              # reliable file watching in Docker
+    restart: unless-stopped
+
+  # ----- Bloom: production build, served as static files by nginx -----
+  bloom-prod:
+    profiles: ["prod"]
+    build:
+      context: ./bloom
+      target: prod
+    container_name: bloom-prod
+    ports:
+      - "8083:80"
+    restart: unless-stopped
+
+  # ----- Orbis.Nft: dark-space NFT landing (liquid glass over video) — dev with HMR -----
+  orbis:
+    build:
+      context: ./orbis
+      target: dev
+    container_name: orbis-dev
+    ports:
+      - "5177:5177"
+    volumes:
+      - ./orbis:/app                          # live source -> instant HMR
+      - orbis_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true              # reliable file watching in Docker
+    restart: unless-stopped
+
+  # ----- Orbis.Nft: production build, served as static files by nginx -----
+  orbis-prod:
+    profiles: ["prod"]
+    build:
+      context: ./orbis
+      target: prod
+    container_name: orbis-prod
+    ports:
+      - "8084:80"
+    restart: unless-stopped
+
+  # ----- Taskora: dark SaaS hero + mock dashboard (Framer Motion) — dev with HMR -----
+  taskora:
+    build:
+      context: ./taskora
+      target: dev
+    container_name: taskora-dev
+    ports:
+      - "5178:5178"
+    volumes:
+      - ./taskora:/app                          # live source -> instant HMR
+      - taskora_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true                # reliable file watching in Docker
+    restart: unless-stopped
+
+  # ----- Taskora: production build, served as static files by nginx -----
+  taskora-prod:
+    profiles: ["prod"]
+    build:
+      context: ./taskora
+      target: prod
+    container_name: taskora-prod
+    ports:
+      - "8085:80"
+    restart: unless-stopped
+
+  # ----- Gallery "Design Express": the train hub that links every site -----
+  gallery:
+    build:
+      context: ./gallery
+      target: dev
+    container_name: gallery-dev
+    ports:
+      - "5179:5179"
+    volumes:
+      - ./gallery:/app                          # live source -> instant HMR
+      - gallery_node_modules:/app/node_modules  # keep the image's installed deps
+    environment:
+      - CHOKIDAR_USEPOLLING=true                # reliable file watching in Docker
+    restart: unless-stopped
+
+  gallery-prod:
+    profiles: ["prod"]
+    build:
+      context: ./gallery
+      target: prod
+    container_name: gallery-prod
+    ports:
+      - "8086:80"
+    restart: unless-stopped
+
+volumes:
+  lithos_node_modules:
+  mainframe_node_modules:
+  cursor_follow_node_modules:
+  bloom_node_modules:
+  orbis_node_modules:
+  taskora_node_modules:
+  gallery_node_modules:

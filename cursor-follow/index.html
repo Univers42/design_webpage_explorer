@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>Core Features — Built for Speed &amp; Quality</title>
+  </head>
+  <body>
+    <!-- Full-page monster background — drifts toward the cursor (see src/follow.js) -->
+    <div class="cf-bg" aria-hidden="true">
+      <video class="cf-bg-video" src="/videos/character.mp4" autoplay loop muted playsinline></video>
+      <div class="cf-bg-veil"></div>
+    </div>
+
+    <main class="c1-container">
+      <!-- Header -->
+      <div class="c1-badge">Core Features</div>
+      <h2 class="c1-title">Built for Speed &amp; Quality</h2>
+      <p class="c1-subtitle">Everything you need to go<br />from idea to image</p>
+
+      <!-- Grid -->
+      <div class="c1-grid">
+        <!-- Card 1 — Smart Prompt Suggestions -->
+        <article class="c1-card c1-card-1">
+          <video
+            class="c1-card-1-media"
+            src="/videos/character.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+          <div class="c1-prompt-box">
+            A bright, high-resolution 3D illustration of a
+            <span class="c1-blur-text">cheerful cartoon</span> of a
+            <span class="c1-blur-text">girl character</span>
+            <span class="c1-blur-text">centred against a</span> smooth blue
+            background
+          </div>
+
+          <button class="c1-pill-details" type="button">
+            <span class="c1-spark">✦</span> Add more details
+          </button>
+
+          <svg class="c1-cursor" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 2L20 11L11 13L9 22L4 2Z" />
+          </svg>
+
+          <h3>Smart Prompt Suggestions</h3>
+        </article>
+
+        <!-- Card 2 — API Access -->
+        <article class="c1-card c1-card-2">
+          <div class="c1-api-visual">
+            <img
+              class="c1-network-img"
+              src="https://pub-f170a2592d2c4a1485466404c36807be.r2.dev/viktor/network.svg"
+              alt="API network diagram"
+            />
+          </div>
+          <h3>API Access</h3>
+        </article>
+
+        <!-- Card 3 — Project Library -->
+        <article class="c1-card c1-card-3">
+          <div class="c1-mesh"></div>
+          <img
+            class="c1-folder"
+            src="https://pub-f170a2592d2c4a1485466404c36807be.r2.dev/viktor/library%20icon.svg"
+            alt="Project library folder"
+          />
+          <div class="c1-search">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            Search projects
+          </div>
+          <h3>Project Library</h3>
+        </article>
+      </div>
+    </main>
+    <script type="module" src="/src/follow.js"></script>
+  </body>
+</html>
